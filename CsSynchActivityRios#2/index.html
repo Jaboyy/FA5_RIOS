@@ -11,11 +11,11 @@
 <body>
   <div class="container">
     
-    <h1>Contacts List</h1>
+    <h1>Contacts List (RIOS) </h1>
    
     <input type="text" id="nameInput" placeholder="Enter Name">
-    <button id="addContactButton">Add</button>
-    <button id="removeContactButton" disabled>Remove</button>
+    <button id="add"> add</button>
+    <button id="remove" disabled> remove </button>
   </div> 
   
   
@@ -23,8 +23,8 @@
   <script>
     const contactsList = document.getElementById("contacts");
     const nameInput = document.getElementById("nameInput");
-    const addContactButton = document.getElementById("addContactButton");
-    const removeContactButton = document.getElementById("removeContactButton");
+    const addContactButton = document.getElementById("add");
+    const removeContactButton = document.getElementById("remove");
 
     let contacts = []; //empty array
 
@@ -40,12 +40,17 @@
         if (contacts.length < 7) {
           contacts.push(name);
         } else {
-          contacts.shift(); // Remove first element if full
+
           contacts.push(name);
+         
+          contacts.shift(); 
+
+
         }
-        nameInput.value = ""; // Clear input field
+        
+        nameInput.value = ""; 
         updateList();
-        updateRemoveButtonState(); // Update remove button state
+        update(); 
       }
     }
 
@@ -54,18 +59,18 @@
       if (contacts.length > 0) {
         contacts.pop(); 
         updateList();
-        updateRemoveButtonState(); // Update remove button state
+        update(); 
       } else {
-        alert("Contacts list is empty!");
+        alert("EMPTY!");
       }
     }
 
     
-    function updateRemoveButtonState() {
+    function update() {
       removeContactButton.disabled = contacts.length === 0;
     }
 
-    // Assigning functions to onclick attributes
+    
     addContactButton.onclick = add;
     removeContactButton.onclick = remove;
   </script>
