@@ -4,88 +4,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contacts (RIOS)  </title>
-  
+  <title>Contacts (RIOS)</title>
+
+  <style> 
+
+    #contacts {
+      margin-top: 50px;
+      font-size: 18px;
+      color: #333;
+    }
+
+
+  </style>
 </head>
 
 <body>
   <div class="container">
     
-    <h1>Contacts List (RIOS) </h1>
-   
-    <input type="text" id="nameInput" placeholder="Enter Name">
-
-    <button id="add"> add</button>
-
-    <button id="remove" disabled> remove </button>
-
-  </div> 
-  
-  
-  <ul id="contacts"></ul>
-  <script> 
+    <h1>Contacts List (RIOS)</h1>
     
-    const contactsList = document.getElementById ("contacts");
-    const nameInput = document.getElementById("nameInput");
+    <input type="text" id="nameInput" placeholder="Enter Name">
+    
+    <button id="add">add</button>
+    
+    <button id="remove" disabled> remove </button>
+  </div>
+  
+  <div id="contacts"></div>
 
+  <script>
+    const contactsList = document.getElementById("contacts");
+    const nameInput = document.getElementById("nameInput");
     const addContactButton = document.getElementById("add");
     const removeContactButton = document.getElementById("remove");
 
-    let contacts = []; //empty array
+    let contacts = []; // empty array
 
     function updateList() {
-    contactsList.innerHTML = contacts.join(", ");
+      contactsList.textContent = contacts.join(", ");
     }
-    
 
-    
     function add() {
       const name = nameInput.value.trim();
       if (name) {
         if (contacts.length < 7) {
           contacts.push(name);
         } else {
-
           contacts.push(name);
-         
-          contacts.shift(); 
-
-
+          contacts.shift();
         }
-        
-        nameInput.value = ""; 
+        nameInput.value = "";
         updateList();
-        update(); 
+        removeContactButton.disabled = false; // Enable the remove button
       }
-
-      
     }
 
-    
     function remove() {
       if (contacts.length > 0) {
-        contacts.pop(); 
+        contacts.pop();
         updateList();
-        update(); 
+        if (contacts.length === 0) {
+          removeContactButton.disabled = true; // Disable the remove button if no contacts are left
+        }
       } else {
-        alert("EMPTY!");
+        alert("There are no contacts to remove.");
       }
     }
 
-    
-    function remove() {
-    if (contacts.length > 0) {
-    contacts.pop();
-    updateList();
-    } else {
-    alert("There are no contacts to remove.");
-    }
-    }
-
-    removeContactButton.disabled = false; // Enable the remove button
-
-    removeContactButton.onclick = remove; // Call the remove function when the remove button is clicked
-
+    addContactButton.onclick = add; 
+    removeContactButton.onclick = remove; 
   </script>
 </body>
 
